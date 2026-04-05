@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#18181b" />
+      <stop offset="100%" stop-color="#09090b" />
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#f97316" stop-opacity="0.25" />
+      <stop offset="100%" stop-color="#f97316" stop-opacity="0" />
+    </radialGradient>
+    <filter id="neon">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <rect width="100%" height="100%" fill="url(#bg)" />
+  <rect width="100%" height="100%" fill="url(#glow)" />
+  
+  <!-- Data Nodes -->
+  <g opacity="0.3" stroke="#f97316" stroke-width="2" fill="none">
+    <circle cx="100" cy="100" r="5" />
+    <circle cx="200" cy="50" r="5" />
+    <circle cx="700" cy="150" r="5" />
+    <circle cx="650" cy="450" r="5" />
+    <path d="M100 100 L200 50 M200 50 L400 300 M700 150 L400 300 M650 450 L400 300" />
+  </g>
+  
+  <!-- SIM Card Shape -->
+  <path d="M 270 120 L 480 120 L 530 170 L 530 480 Q 530 500 510 500 L 290 500 Q 270 500 270 480 Z" fill="#27272a" stroke="#3f3f46" stroke-width="3" />
+  
+  <!-- Golden Chip Area -->
+  <rect x="330" y="240" width="140" height="120" rx="10" fill="#1f1f22" stroke="#eab308" stroke-width="4" filter="url(#neon)" />
+  
+  <!-- Chip Circuit Lines -->
+  <line x1="330" y1="270" x2="360" y2="270" stroke="#eab308" stroke-width="2" filter="url(#neon)" />
+  <line x1="330" y1="300" x2="370" y2="300" stroke="#eab308" stroke-width="2" filter="url(#neon)" />
+  <line x1="330" y1="330" x2="360" y2="330" stroke="#eab308" stroke-width="2" filter="url(#neon)" />
+  
+  <line x1="470" y1="270" x2="440" y2="270" stroke="#eab308" stroke-width="2" filter="url(#neon)" />
+  <line x1="470" y1="300" x2="430" y2="300" stroke="#eab308" stroke-width="2" filter="url(#neon)" />
+  <line x1="470" y1="330" x2="440" y2="330" stroke="#eab308" stroke-width="2" filter="url(#neon)" />
+  
+  <!-- WiFi Waves (Data Bundle Visual) -->
+  <path d="M 330 180 Q 400 130 470 180" fill="none" stroke="#38bdf8" stroke-width="6" stroke-linecap="round" filter="url(#neon)"/>
+  <path d="M 360 210 Q 400 180 440 210" fill="none" stroke="#38bdf8" stroke-width="6" stroke-linecap="round" filter="url(#neon)"/>
+</svg>

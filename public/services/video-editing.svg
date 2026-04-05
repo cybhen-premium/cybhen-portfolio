@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#18181b" />
+      <stop offset="100%" stop-color="#09090b" />
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#f97316" stop-opacity="0.2" />
+      <stop offset="100%" stop-color="#f97316" stop-opacity="0" />
+    </radialGradient>
+    <filter id="neon">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <rect width="100%" height="100%" fill="url(#bg)" />
+  <rect width="100%" height="100%" fill="url(#glow)" />
+  
+  <!-- Film Strip Background -->
+  <rect x="0" y="250" width="800" height="100" fill="#27272a" />
+  <path d="M20 260 h20 v20 h-20 M60 260 h20 v20 h-20 M100 260 h20 v20 h-20 M140 260 h20 v20 h-20 M180 260 h20 v20 h-20 M220 260 h20 v20 h-20 M260 260 h20 v20 h-20 M300 260 h20 v20 h-20 M340 260 h20 v20 h-20 M380 260 h20 v20 h-20 M420 260 h20 v20 h-20 M460 260 h20 v20 h-20 M500 260 h20 v20 h-20 M540 260 h20 v20 h-20 M580 260 h20 v20 h-20 M620 260 h20 v20 h-20 M660 260 h20 v20 h-20 M700 260 h20 v20 h-20 M740 260 h20 v20 h-20 M780 260 h20 v20 h-20" stroke="#09090b" stroke-width="4" />
+  <path d="M20 320 h20 v20 h-20 M60 320 h20 v20 h-20 M100 320 h20 v20 h-20 M140 320 h20 v20 h-20 M180 320 h20 v20 h-20 M220 320 h20 v20 h-20 M260 320 h20 v20 h-20 M300 320 h20 v20 h-20 M340 320 h20 v20 h-20 M380 320 h20 v20 h-20 M420 320 h20 v20 h-20 M460 320 h20 v20 h-20 M500 320 h20 v20 h-20 M540 320 h20 v20 h-20 M580 320 h20 v20 h-20 M620 320 h20 v20 h-20 M660 320 h20 v20 h-20 M700 320 h20 v20 h-20 M740 320 h20 v20 h-20 M780 320 h20 v20 h-20" stroke="#09090b" stroke-width="4" />
+  
+  <!-- Glowing Timeline Tracks -->
+  <rect x="150" y="420" width="180" height="15" rx="7.5" fill="#38bdf8" filter="url(#neon)" />
+  <rect x="350" y="420" width="300" height="15" rx="7.5" fill="#eab308" filter="url(#neon)" />
+  <rect x="250" y="450" width="200" height="15" rx="7.5" fill="#c084fc" filter="url(#neon)" />
+  <rect x="470" y="450" width="100" height="15" rx="7.5" fill="#ec4899" filter="url(#neon)" />
+  
+  <rect x="380" y="380" width="4" height="120" fill="#ef4444" filter="url(#neon)" />
+  <polygon points="375,380 389,380 382,390" fill="#ef4444" />
+  
+  <!-- Center Play Button -->
+  <circle cx="400" cy="150" r="60" fill="none" stroke="#f97316" stroke-width="8" filter="url(#neon)" />
+  <polygon points="380,120 440,150 380,180" fill="#f97316" filter="url(#neon)" />
+</svg>

@@ -1,0 +1,18 @@
+@import "tailwindcss";
+
+:root {
+  --background: #18191c;
+  --foreground: #fcfcfc;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+@utility clip-bottom {
+  clip-path: polygon(0 0, 100% 0, 100% 95%, 0 100%);
+}
