@@ -95,6 +95,7 @@ export default function PortfolioPage() {
 
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const [errorMsg, setErrorMsg] = useState('');
   const [galleryTab, setGalleryTab] = useState<'designs' | 'data' | 'docs'>('designs');
 
   const handleContactSubmit = async (e: React.FormEvent) => {
@@ -108,17 +109,22 @@ export default function PortfolioPage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
       });
+      const data = await res.json();
+      
       if (res.ok) {
         setStatus('success');
         setFormData({ name: '', email: '', message: '' });
+        setErrorMsg('');
         setTimeout(() => setStatus('idle'), 4000);
       } else {
         setStatus('error');
-        setTimeout(() => setStatus('idle'), 4000);
+        setErrorMsg(data.error || 'Failed to send on server.');
+        setTimeout(() => setStatus('idle'), 6000);
       }
-    } catch {
+    } catch (err: any) {
       setStatus('error');
-      setTimeout(() => setStatus('idle'), 4000);
+      setErrorMsg(err.message || 'Network error occurred.');
+      setTimeout(() => setStatus('idle'), 6000);
     }
   };
 
@@ -633,7 +639,7 @@ export default function PortfolioPage() {
                     </button>
 
                     {status === 'success' && <p className="text-green-500 text-sm text-center mt-2 font-medium">Message sent successfully! I will get back to you soon.</p>}
-                    {status === 'error' && <p className="text-red-500 text-sm text-center mt-2 font-medium">Failed to send. Please check your credentials config.</p>}
+                    {status === 'error' && <p className="text-red-500 text-sm text-center mt-2 font-medium">Error: {errorMsg}</p>}
                   </form>
 
                   <div className="mt-8 pt-6 border-t border-zinc-800">
