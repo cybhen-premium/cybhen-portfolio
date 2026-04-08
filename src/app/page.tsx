@@ -154,9 +154,8 @@ export default function PortfolioPage() {
             }`}
         >
           <div className="max-w-7xl mx-auto px-6 lg:px-8 flex items-center justify-between">
-            <a href="#" className="flex items-center gap-2 group">
-              <span className="w-3 h-3 rounded-full bg-orange-500 group-hover:animate-pulse"></span>
-              <span className="text-xl font-bold tracking-tight">Cybhen Premium<span className="text-orange-500">.</span></span>
+            <a href="#" className="flex items-center group">
+              <img src="/logo.jpg" alt="Cybhen Premium Logo" className="h-10 w-auto rounded-md object-contain group-hover:scale-105 transition-transform duration-300" />
             </a>
 
             {/* Desktop Nav */}
