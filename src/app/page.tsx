@@ -118,7 +118,6 @@ export default function PortfolioPage() {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [errorMsg, setErrorMsg] = useState('');
-  const [galleryTab, setGalleryTab] = useState<'designs' | 'data' | 'docs'>('designs');
 
   const handleContactSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -366,87 +365,40 @@ export default function PortfolioPage() {
               <div className="text-center mb-12">
                 <span className="text-orange-500 font-semibold tracking-wide uppercase text-sm mb-2 block">Our Gallery</span>
                 <h2 className="text-4xl font-bold mb-4">Let's Have A Look At My <span className="text-orange-500">Work</span></h2>
-                <p className="text-zinc-400 max-w-xl mx-auto text-sm">Browse through my designs, data bundle offers, and document processing flyers.</p>
+                <p className="text-zinc-400 max-w-xl mx-auto text-sm">Browse through my premium logo designs, brand identities, and event flyers.</p>
               </div>
 
-              {/* Tab Switcher */}
-              <div className="flex justify-center mb-10">
-                <div className="inline-flex bg-zinc-800 border border-zinc-700 rounded-2xl p-1.5 gap-1">
-                  {([
-                    { key: 'designs', label: '🎨 Designs' },
-                    { key: 'data', label: '📶 Data Bundles' },
-                    { key: 'docs', label: '📄 Doc Processing' },
-                  ] as const).map((tab) => (
-                    <button
-                      key={tab.key}
-                      id={`gallery-tab-${tab.key}`}
-                      onClick={() => setGalleryTab(tab.key)}
-                      className={`px-5 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 ${galleryTab === tab.key
-                          ? 'bg-orange-500 text-white shadow-lg shadow-orange-500/30'
-                          : 'text-zinc-400 hover:text-white'
-                        }`}
-                    >
-                      {tab.label}
-                    </button>
-                  ))}
-                </div>
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {[
+                  { src: '/designs/design1.jpg', title: 'Brand Identity', tag: 'Branding' },
+                  { 
+                    src: '/gallery/event-flyers/furnance-experience.png', 
+                    title: 'Event Flyers Collection', 
+                    tag: 'Graphic Design',
+                    images: [
+                      '/gallery/event-flyers/furnance-experience.png',
+                      '/gallery/event-flyers/easter.png',
+                      '/gallery/event-flyers/easter-convention.png',
+                      '/gallery/event-flyers/boogie-king.png',
+                      '/gallery/event-flyers/fight-that-beast.png',
+                      '/gallery/event-flyers/jhjhj.png',
+                      '/gallery/event-flyers/worship.png',
+                      '/gallery/event-flyers/healing-in-worship.png',
+                      '/gallery/event-flyers/thanksgiving.png'
+                    ]
+                  },
+                  { src: '/designs/design4.jpg', title: 'Logo Design', tag: 'Branding' },
+                ].map((item: any, i) => (
+                  <GalleryCard 
+                    key={i} 
+                    src={item.src} 
+                    title={item.title} 
+                    tag={item.tag} 
+                    images={item.images}
+                    hint={`Add your design image to /public/designs/design${i + 1}.jpg`} 
+                  />
+                ))}
               </div>
-
-              {/* ── TAB: Designs ── */}
-              {galleryTab === 'designs' && (
-                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {[
-                    { src: '/designs/design1.jpg', title: 'Brand Identity', tag: 'Branding' },
-                    { src: '/designs/design2.jpg', title: 'Social Media Post', tag: 'Digital' },
-                    { 
-                      src: '/gallery/event-flyers/furnance-experience.png', 
-                      title: 'Event Flyers Collection', 
-                      tag: 'Graphic Design',
-                      images: [
-                        '/gallery/event-flyers/furnance-experience.png',
-                        '/gallery/event-flyers/easter.png',
-                        '/gallery/event-flyers/easter-convention.png',
-                        '/gallery/event-flyers/boogie-king.png',
-                        '/gallery/event-flyers/fight-that-beast.png',
-                        '/gallery/event-flyers/jhjhj.png',
-                        '/gallery/event-flyers/worship.png',
-                        '/gallery/event-flyers/healing-in-worship.png',
-                        '/gallery/event-flyers/thanksgiving.png'
-                      ]
-                    },
-                    { src: '/designs/design4.jpg', title: 'Logo Design', tag: 'Branding' },
-                    { src: '/designs/design5.jpg', title: 'Banner Ad', tag: 'Digital' },
-                    { src: '/designs/design6.jpg', title: 'Certificate', tag: 'Print' },
-                  ].map((item: any, i) => (
-                    <GalleryCard 
-                      key={i} 
-                      src={item.src} 
-                      title={item.title} 
-                      tag={item.tag} 
-                      images={item.images}
-                      hint={`Add your design image to /public/designs/design${i + 1}.jpg`} 
-                    />
-                  ))}
-                </div>
-              )}
-
-              {/* ── TAB: Data Bundles ── */}
-              {galleryTab === 'data' && (
-                <div className="flex justify-center">
-                  <div className="w-full max-w-2xl">
-                    <GalleryCard src="/data-bundles/data1.jpg" title="Data Bundle Packages" tag="MTN Data" hint="Add your flyer to /public/data-bundles/data1.jpg" />
-                  </div>
-                </div>
-              )}
-
-              {/* ── TAB: Document Processing ── */}
-              {galleryTab === 'docs' && (
-                <div className="flex justify-center">
-                  <div className="w-full max-w-2xl">
-                    <GalleryCard src="/doc-processing/cert.jpeg" title="Document Processing Services" tag="Docs" hint="Add your document sample to /public/doc-processing/cert.jpeg" />
-                  </div>
-                </div>
-              )}
 
               <div className="mt-12 text-center">
                 <a
