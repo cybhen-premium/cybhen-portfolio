@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 
-function GalleryCard({ src, title, tag, hint }: { src: string; title: string; tag: string; hint: string }) {
+function GalleryCard({ src, title, tag, hint, images }: { src: string; title: string; tag: string; hint: string; images?: string[] }) {
   const [imgError, setImgError] = React.useState(false);
   const [lightboxOpen, setLightboxOpen] = React.useState(false);
 
@@ -60,21 +60,43 @@ function GalleryCard({ src, title, tag, hint }: { src: string; title: string; ta
             </svg>
           </button>
 
-          {/* Image */}
+          {/* Image / Multi-image container */}
           <div
-            className="relative max-w-[90vw] max-h-[90vh] rounded-2xl overflow-hidden shadow-2xl"
+            className={`relative max-w-[90vw] max-h-[90vh] rounded-2xl overflow-hidden shadow-2xl flex flex-col ${images ? 'bg-zinc-900 border border-zinc-800' : ''}`}
             onClick={(e) => e.stopPropagation()}
+            style={{ animation: 'lightboxIn 0.25s ease' }}
           >
-            <img
-              src={src}
-              alt={title}
-              className="block max-w-[90vw] max-h-[90vh] w-auto h-auto object-contain rounded-2xl"
-              style={{ animation: 'lightboxIn 0.25s ease' }}
-            />
-            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent px-6 py-4 rounded-b-2xl">
-              <span className="text-orange-500 text-xs font-semibold uppercase tracking-wider">{tag}</span>
-              <h4 className="text-white font-bold text-lg">{title}</h4>
-            </div>
+            {images ? (
+              <div className="overflow-y-auto p-6 lg:p-10 no-scrollbar">
+                <div className="text-center mb-8">
+                  <span className="text-orange-500 text-xs font-semibold uppercase tracking-wider">{tag}</span>
+                  <h4 className="text-white font-bold text-2xl mt-1">{title}</h4>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {images.map((imgSrc, idx) => (
+                    <div key={idx} className="rounded-xl overflow-hidden border border-zinc-800 group/img bg-zinc-800/50">
+                      <img
+                        src={imgSrc}
+                        alt={`${title} - ${idx + 1}`}
+                        className="w-full h-auto object-contain transition-transform duration-500 group-hover/img:scale-105"
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ) : (
+              <>
+                <img
+                  src={src}
+                  alt={title}
+                  className="block max-w-[90vw] max-h-[90vh] w-auto h-auto object-contain rounded-2xl"
+                />
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent px-6 py-4 rounded-b-2xl">
+                  <span className="text-orange-500 text-xs font-semibold uppercase tracking-wider">{tag}</span>
+                  <h4 className="text-white font-bold text-lg">{title}</h4>
+                </div>
+              </>
+            )}
           </div>
 
           <style>{`
@@ -110,7 +132,7 @@ export default function PortfolioPage() {
         body: JSON.stringify(formData),
       });
       const data = await res.json();
-
+      
       if (res.ok) {
         setStatus('success');
         setFormData({ name: '', email: '', message: '' });
@@ -360,8 +382,8 @@ export default function PortfolioPage() {
                       id={`gallery-tab-${tab.key}`}
                       onClick={() => setGalleryTab(tab.key)}
                       className={`px-5 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 ${galleryTab === tab.key
-                        ? 'bg-orange-500 text-white shadow-lg shadow-orange-500/30'
-                        : 'text-zinc-400 hover:text-white'
+                          ? 'bg-orange-500 text-white shadow-lg shadow-orange-500/30'
+                          : 'text-zinc-400 hover:text-white'
                         }`}
                     >
                       {tab.label}
@@ -376,12 +398,34 @@ export default function PortfolioPage() {
                   {[
                     { src: '/designs/design1.jpg', title: 'Brand Identity', tag: 'Branding' },
                     { src: '/designs/design2.jpg', title: 'Social Media Post', tag: 'Digital' },
-                    { src: '/designs/design3.jpg', title: 'Event Flyer', tag: 'Print' },
+                    { 
+                      src: '/gallery/event-flyers/furnance-experience.png', 
+                      title: 'Event Flyers Collection', 
+                      tag: 'Graphic Design',
+                      images: [
+                        '/gallery/event-flyers/furnance-experience.png',
+                        '/gallery/event-flyers/easter.png',
+                        '/gallery/event-flyers/easter-convention.png',
+                        '/gallery/event-flyers/boogie-king.png',
+                        '/gallery/event-flyers/fight-that-beast.png',
+                        '/gallery/event-flyers/jhjhj.png',
+                        '/gallery/event-flyers/worship.png',
+                        '/gallery/event-flyers/healing-in-worship.png',
+                        '/gallery/event-flyers/thanksgiving.png'
+                      ]
+                    },
                     { src: '/designs/design4.jpg', title: 'Logo Design', tag: 'Branding' },
                     { src: '/designs/design5.jpg', title: 'Banner Ad', tag: 'Digital' },
                     { src: '/designs/design6.jpg', title: 'Certificate', tag: 'Print' },
-                  ].map((item, i) => (
-                    <GalleryCard key={i} src={item.src} title={item.title} tag={item.tag} hint={`Add your design image to /public/designs/design${i + 1}.jpg`} />
+                  ].map((item: any, i) => (
+                    <GalleryCard 
+                      key={i} 
+                      src={item.src} 
+                      title={item.title} 
+                      tag={item.tag} 
+                      images={item.images}
+                      hint={`Add your design image to /public/designs/design${i + 1}.jpg`} 
+                    />
                   ))}
                 </div>
               )}
