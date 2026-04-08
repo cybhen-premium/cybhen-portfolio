@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import { ThemeToggle } from '@/components/ThemeToggle';
 
 function GalleryCard({ src, title, tag, hint }: { src: string; title: string; tag: string; hint: string }) {
   const [imgError, setImgError] = React.useState(false);
@@ -10,7 +11,7 @@ function GalleryCard({ src, title, tag, hint }: { src: string; title: string; ta
     <>
       {/* Card */}
       <div
-        className="group relative rounded-3xl overflow-hidden bg-zinc-900 border border-zinc-700 aspect-[4/3] hover:border-orange-500/50 transition-all hover:-translate-y-1 hover:shadow-[0_10px_40px_rgba(249,115,22,0.15)] cursor-pointer"
+        className="group relative rounded-3xl overflow-hidden bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-700 aspect-[4/3] hover:border-orange-500/50 transition-all hover:-translate-y-1 hover:shadow-[0_10px_40px_rgba(249,115,22,0.15)] cursor-pointer"
         onClick={() => !imgError && setLightboxOpen(true)}
       >
         {!imgError ? (
@@ -27,15 +28,15 @@ function GalleryCard({ src, title, tag, hint }: { src: string; title: string; ta
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
               </svg>
             </div>
-            <p className="text-zinc-500 text-xs leading-relaxed">{hint}</p>
+            <p className="text-slate-500 dark:text-zinc-500 text-xs leading-relaxed">{hint}</p>
           </div>
         )}
 
         {/* Hover overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-5 pointer-events-none">
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 dark:from-zinc-950 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-5 pointer-events-none">
           <span className="text-orange-500 text-xs font-semibold uppercase tracking-wider mb-0.5">{tag}</span>
-          <h4 className="text-base font-bold text-white">{title}</h4>
-          <p className="text-zinc-400 text-xs mt-1 flex items-center gap-1">
+          <h4 className="text-base font-bold text-white shadow-sm">{title}</h4>
+          <p className="text-white/80 dark:text-zinc-400 text-xs mt-1 flex items-center gap-1">
             <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" /></svg>
             Click to expand
           </p>
@@ -147,16 +148,16 @@ export default function PortfolioPage() {
 
   return (
     <>
-      <div className="min-h-screen bg-zinc-900 text-zinc-50 font-sans selection:bg-orange-500/30">
+      <div className="min-h-screen bg-background text-foreground font-sans selection:bg-orange-500/30 transition-colors duration-300">
         {/* ===== NAVBAR ===== */}
         <nav
-          className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-zinc-900/95 backdrop-blur-md py-4 shadow-lg shadow-black/20' : 'bg-transparent py-6'
+          className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white/80 dark:bg-zinc-900/95 backdrop-blur-md py-4 shadow-lg shadow-black/5 dark:shadow-black/20' : 'bg-transparent py-6'
             }`}
         >
           <div className="max-w-7xl mx-auto px-6 lg:px-8 flex items-center justify-between">
             <a href="#" className="flex items-center gap-3 group">
               <img src="/logo.jpg" alt="Cybhen Premium Logo" className="h-10 w-auto rounded-md object-contain group-hover:scale-105 transition-transform duration-300" />
-              <span className="text-xl font-bold tracking-tight">Cybhen Premium<span className="text-orange-500">.</span></span>
+              <span className="text-xl font-bold tracking-tight text-slate-900 dark:text-zinc-50">Cybhen Premium<span className="text-orange-500">.</span></span>
             </a>
 
             {/* Desktop Nav */}
@@ -168,7 +169,7 @@ export default function PortfolioPage() {
                       href={link.href}
                       target={link.target}
                       rel={link.rel}
-                      className="text-sm font-medium text-zinc-300 hover:text-orange-500 transition-colors relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[2px] after:bg-orange-500 hover:after:w-full after:transition-all after:duration-300"
+                      className="text-sm font-medium text-slate-600 dark:text-zinc-300 hover:text-orange-500 transition-colors relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[2px] after:bg-orange-500 hover:after:w-full after:transition-all after:duration-300"
                     >
                       {link.name}
                     </a>
@@ -176,24 +177,26 @@ export default function PortfolioPage() {
                 ))}
               </ul>
               <a href="#contact" className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-2.5 rounded-full text-sm font-semibold transition-transform hover:scale-105 active:scale-95 shadow-lg shadow-orange-500/25">
-                Hire Me
+                 Hire Me
               </a>
             </div>
 
-            {/* Mobile Menu Button */}
-            <button
-              className="md:hidden text-zinc-300 hover:text-white p-2"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            >
-              <svg xmlns="http://www.w3.00/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
-            </button>
+              <div className="flex items-center gap-2">
+                <ThemeToggle />
+                <button
+                  className="text-zinc-500 dark:text-zinc-300 hover:text-orange-500 p-2 md:hidden"
+                  onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+                  </svg>
+                </button>
+              </div>
           </div>
 
           {/* Mobile Nav Dropdown */}
           {mobileMenuOpen && (
-            <div className="absolute top-full left-0 w-full bg-zinc-800 border-t border-zinc-700 shadow-xl md:hidden flex flex-col py-4 px-6 gap-4">
+            <div className="absolute top-full left-0 w-full bg-white dark:bg-zinc-800 border-t border-slate-200 dark:border-zinc-700 shadow-xl md:hidden flex flex-col py-4 px-6 gap-4">
               {navLinks.map((link) => (
                 <a
                   key={link.name}
@@ -201,7 +204,7 @@ export default function PortfolioPage() {
                   target={link.target}
                   rel={link.rel}
                   onClick={() => setMobileMenuOpen(false)}
-                  className="text-base font-medium text-zinc-300 hover:text-orange-500 block py-2"
+                  className="text-base font-medium text-slate-600 dark:text-zinc-300 hover:text-orange-500 block py-2"
                 >
                   {link.name}
                 </a>
@@ -217,14 +220,14 @@ export default function PortfolioPage() {
 
             <div className="max-w-7xl mx-auto px-6 lg:px-8 grid lg:grid-cols-2 gap-16 items-center">
               <div className="relative z-10 order-2 lg:order-1 text-center lg:text-left">
-                <span className="inline-block py-1.5 px-4 rounded-full bg-zinc-800 border border-zinc-700 text-sm font-medium text-zinc-300 mb-6 group cursor-default">
+                <span className="inline-block py-1.5 px-4 rounded-full bg-slate-100 dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 text-sm font-medium text-slate-600 dark:text-zinc-300 mb-6 group cursor-default shadow-sm">
                   👋 Welcome! I am a <span className="text-orange-500 group-hover:text-orange-400 transition-colors">Multi-Disciplinary Pro</span>
                 </span>
-                <h1 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight mb-8 leading-[1.1]">
+                <h1 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight mb-8 leading-[1.1] text-slate-900 dark:text-white">
                   Creative Designer <br />
                   <span className="text-orange-500">&amp; Developer</span>
                 </h1>
-                <p className="text-lg text-zinc-400 mb-10 max-w-xl mx-auto lg:mx-0">
+                <p className="text-lg text-slate-600 dark:text-zinc-400 mb-10 max-w-xl mx-auto lg:mx-0">
                   Delivering high-quality visual aesthetics, robust technical solutions, and seamless document processing—all tailored to help you stand out and succeed.
                 </p>
 
@@ -232,26 +235,26 @@ export default function PortfolioPage() {
                   <a href="#portfolio" className="bg-orange-500 hover:bg-orange-600 text-white px-8 py-4 rounded-full font-semibold transition-all hover:shadow-[0_0_25px_rgba(249,115,22,0.4)] hover:-translate-y-1">
                     View Portfolio
                   </a>
-                  <a href="#contact" className="bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 text-white px-8 py-4 rounded-full font-semibold transition-all hover:-translate-y-1">
+                  <a href="#contact" className="bg-slate-100 dark:bg-zinc-800 hover:bg-slate-200 dark:hover:bg-zinc-700 border border-slate-200 dark:border-zinc-700 text-slate-900 dark:text-white px-8 py-4 rounded-full font-semibold transition-all hover:-translate-y-1 shadow-sm">
                     Let's Talk
                   </a>
                 </div>
 
-                <div className="flex items-center justify-center lg:justify-start gap-12 pt-6 border-t border-zinc-800">
+                <div className="flex items-center justify-center lg:justify-start gap-12 pt-6 border-t border-slate-200 dark:border-zinc-800">
                   <div>
-                    <h3 className="text-3xl font-bold text-white mb-1">5+</h3>
-                    <p className="text-sm text-zinc-500">Years Experience</p>
+                    <h3 className="text-3xl font-bold text-slate-900 dark:text-white mb-1">5+</h3>
+                    <p className="text-sm text-slate-500 dark:text-zinc-500">Years Experience</p>
                   </div>
                   <div>
-                    <h3 className="text-3xl font-bold text-white mb-1">100+</h3>
-                    <p className="text-sm text-zinc-500">Projects Completed</p>
+                    <h3 className="text-3xl font-bold text-slate-900 dark:text-white mb-1">100+</h3>
+                    <p className="text-sm text-slate-500 dark:text-zinc-500">Projects Completed</p>
                   </div>
                 </div>
               </div>
 
               <div className="relative z-10 order-1 lg:order-2 flex justify-center">
                 {/* === USER IMAGE HERO === */}
-                <div className="w-full max-w-md aspect-[4/5] rounded-[40px] rotate-2 hover:rotate-0 transition-transform duration-500 shadow-2xl relative overflow-hidden group border-4 border-zinc-800">
+                <div className="w-full max-w-md aspect-[4/5] rounded-[40px] rotate-2 hover:rotate-0 transition-transform duration-500 shadow-2xl relative overflow-hidden group border-4 border-slate-100 dark:border-zinc-800">
                   <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent z-10 opacity-60"></div>
                   <img
                     src="/me.jpeg"
@@ -264,60 +267,60 @@ export default function PortfolioPage() {
           </section>
 
           {/* ===== SERVICES SECTION ===== */}
-          <section id="services" className="py-24 bg-zinc-950 relative">
+          <section id="services" className="py-24 bg-slate-50 dark:bg-zinc-950 relative">
             <div className="max-w-7xl mx-auto px-6 lg:px-8">
               <div className="mb-16">
-                <h2 className="text-4xl font-bold mb-4">My <span className="text-orange-500">Services</span></h2>
-                <p className="text-zinc-400 max-w-2xl">From professional creative design to reliable technical solutions and document processing, I provide a comprehensive suite of services.</p>
+                <h2 className="text-4xl font-bold mb-4 text-slate-900 dark:text-white">My <span className="text-orange-500">Services</span></h2>
+                <p className="text-slate-600 dark:text-zinc-400 max-w-2xl">From professional creative design to reliable technical solutions and document processing, I provide a comprehensive suite of services.</p>
               </div>
 
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {/* Service 1 */}
-                <div className="group bg-zinc-900 border border-zinc-800 p-6 rounded-3xl hover:border-orange-500/50 transition-all hover:bg-zinc-800/50 hover:shadow-[0_10px_40px_rgba(249,115,22,0.1)] hover:-translate-y-2 flex flex-col">
-                  <div className="w-full h-48 mb-6 rounded-2xl overflow-hidden relative border border-zinc-800">
+                <div className="group bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 p-6 rounded-3xl hover:border-orange-500/50 transition-all hover:bg-slate-50 dark:hover:bg-zinc-800/50 hover:shadow-[0_10px_40px_rgba(249,115,22,0.1)] hover:-translate-y-2 flex flex-col">
+                  <div className="w-full h-48 mb-6 rounded-2xl overflow-hidden relative border border-slate-200 dark:border-zinc-800">
                     <img src="/services/graphic-design.svg" alt="Graphic Design" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                    <div className="absolute top-4 right-4 w-12 h-12 bg-zinc-900/80 backdrop-blur-md rounded-xl flex items-center justify-center text-orange-500 border border-zinc-700/50">
+                    <div className="absolute top-4 right-4 w-12 h-12 bg-white/90 dark:bg-zinc-900/80 backdrop-blur-md rounded-xl flex items-center justify-center text-orange-500 border border-slate-200 dark:border-zinc-700/50">
                       <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" /></svg>
                     </div>
                   </div>
-                  <h3 className="text-xl font-bold text-white mb-3">Graphic Design</h3>
-                  <p className="text-zinc-400 text-sm leading-relaxed">Stunning visual identities, branding, flyers, banners, and digital graphics tailored to captivate your audience.</p>
+                  <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-3">Graphic Design</h3>
+                  <p className="text-slate-600 dark:text-zinc-400 text-sm leading-relaxed">Stunning visual identities, branding, flyers, banners, and digital graphics tailored to captivate your audience.</p>
                 </div>
 
                 {/* Service 2 */}
                 <div className="group bg-zinc-900 border border-zinc-800 p-6 rounded-3xl hover:border-orange-500/50 transition-all hover:bg-zinc-800/50 hover:shadow-[0_10px_40px_rgba(249,115,22,0.1)] hover:-translate-y-2 lg:-translate-y-6 flex flex-col">
                   <div className="w-full h-48 mb-6 rounded-2xl overflow-hidden relative border border-zinc-800">
                     <img src="/services/video-editing.svg" alt="Video Editing" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                    <div className="absolute top-4 right-4 w-12 h-12 bg-zinc-900/80 backdrop-blur-md rounded-xl flex items-center justify-center text-orange-500 border border-zinc-700/50">
+                    <div className="absolute top-4 right-4 w-12 h-12 bg-white/90 dark:bg-zinc-900/80 backdrop-blur-md rounded-xl flex items-center justify-center text-orange-500 border border-slate-200 dark:border-zinc-700/50">
                       <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>
                     </div>
                   </div>
-                  <h3 className="text-xl font-bold text-white mb-3">Video Editing</h3>
-                  <p className="text-zinc-400 text-sm leading-relaxed">Professional video editing rendering highly engaging content, smooth transitions, and cinematic color grading.</p>
+                  <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-3">Video Editing</h3>
+                  <p className="text-slate-600 dark:text-zinc-400 text-sm leading-relaxed">Professional video editing rendering highly engaging content, smooth transitions, and cinematic color grading.</p>
                 </div>
 
                 {/* Service 3 */}
-                <div className="group bg-zinc-900 border border-zinc-800 p-6 rounded-3xl hover:border-orange-500/50 transition-all hover:bg-zinc-800/50 hover:shadow-[0_10px_40px_rgba(249,115,22,0.1)] hover:-translate-y-2 flex flex-col">
-                  <div className="w-full h-48 mb-6 rounded-2xl overflow-hidden relative border border-zinc-800">
+                <div className="group bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 p-6 rounded-3xl hover:border-orange-500/50 transition-all hover:bg-slate-50 dark:hover:bg-zinc-800/50 hover:shadow-[0_10px_40px_rgba(249,115,22,0.1)] hover:-translate-y-2 flex flex-col">
+                  <div className="w-full h-48 mb-6 rounded-2xl overflow-hidden relative border border-slate-200 dark:border-zinc-800">
                     <img src="/services/web-development.svg" alt="Web Development" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                     <div className="absolute top-4 right-4 w-12 h-12 bg-zinc-900/80 backdrop-blur-md rounded-xl flex items-center justify-center text-orange-500 border border-zinc-700/50">
                       <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
                     </div>
                   </div>
-                  <h3 className="text-xl font-bold text-white mb-3">Web Development</h3>
-                  <p className="text-zinc-400 text-sm leading-relaxed">Building modern, fully responsive, and blazing fast websites and web applications just like this one.</p>
+                  <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-3">Web Development</h3>
+                  <p className="text-slate-600 dark:text-zinc-400 text-sm leading-relaxed">Building modern, fully responsive, and blazing fast websites and web applications just like this one.</p>
                 </div>
 
                 {/* Service 4 */}
-                <div className="group bg-zinc-900 border border-zinc-800 p-6 rounded-3xl hover:border-orange-500/50 transition-all hover:bg-zinc-800/50 hover:shadow-[0_10px_40px_rgba(249,115,22,0.1)] hover:-translate-y-2 flex flex-col">
-                  <div className="w-full h-48 mb-6 rounded-2xl overflow-hidden relative border border-zinc-800">
+                <div className="group bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 p-6 rounded-3xl hover:border-orange-500/50 transition-all hover:bg-slate-50 dark:hover:bg-zinc-800/50 hover:shadow-[0_10px_40px_rgba(249,115,22,0.1)] hover:-translate-y-2 flex flex-col">
+                  <div className="w-full h-48 mb-6 rounded-2xl overflow-hidden relative border border-slate-200 dark:border-zinc-800">
                     <img src="/services/document-processing.svg" alt="Document Processing" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                     <div className="absolute top-4 right-4 w-12 h-12 bg-zinc-900/80 backdrop-blur-md rounded-xl flex items-center justify-center text-orange-500 border border-zinc-700/50">
                       <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2" /></svg>
                     </div>
                   </div>
-                  <h3 className="text-xl font-bold text-white mb-3">Document Processing</h3>
-                  <p className="text-zinc-400 text-sm leading-relaxed">Fast & reliable processing for passports, birth certificates, and official documentation setups.</p>
+                  <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-3">Document Processing</h3>
+                  <p className="text-slate-600 dark:text-zinc-400 text-sm leading-relaxed">Fast & reliable processing for passports, birth certificates, and official documentation setups.</p>
                 </div>
 
                 {/* Service 5 */}
@@ -343,13 +346,13 @@ export default function PortfolioPage() {
               {/* Section Header */}
               <div className="text-center mb-12">
                 <span className="text-orange-500 font-semibold tracking-wide uppercase text-sm mb-2 block">Our Gallery</span>
-                <h2 className="text-4xl font-bold mb-4">Let's Have A Look At My <span className="text-orange-500">Work</span></h2>
-                <p className="text-zinc-400 max-w-xl mx-auto text-sm">Browse through my designs, data bundle offers, and document processing flyers.</p>
+                <h2 className="text-4xl font-bold mb-4 text-slate-900 dark:text-white">Let's Have A Look At My <span className="text-orange-500">Work</span></h2>
+                <p className="text-slate-600 dark:text-zinc-400 max-w-xl mx-auto text-sm">Browse through my designs, data bundle offers, and document processing flyers.</p>
               </div>
 
               {/* Tab Switcher */}
               <div className="flex justify-center mb-10">
-                <div className="inline-flex bg-zinc-800 border border-zinc-700 rounded-2xl p-1.5 gap-1">
+                <div className="inline-flex bg-slate-100 dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 rounded-2xl p-1.5 gap-1 shadow-sm">
                   {([
                     { key: 'designs', label: '🎨 Designs' },
                     { key: 'data', label: '📶 Data Bundles' },
@@ -361,7 +364,7 @@ export default function PortfolioPage() {
                       onClick={() => setGalleryTab(tab.key)}
                       className={`px-5 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 ${galleryTab === tab.key
                           ? 'bg-orange-500 text-white shadow-lg shadow-orange-500/30'
-                          : 'text-zinc-400 hover:text-white'
+                          : 'text-slate-500 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200/50 dark:hover:bg-zinc-700/50'
                         }`}
                     >
                       {tab.label}
@@ -438,8 +441,8 @@ export default function PortfolioPage() {
               </div>
 
               <div>
-                <h2 className="text-4xl font-bold mb-6 leading-tight">Why You Should <span className="text-orange-500">Hire Me</span> for Your Next Project?</h2>
-                <p className="text-zinc-400 mb-8 leading-relaxed">
+                <h2 className="text-4xl font-bold mb-6 leading-tight text-slate-900 dark:text-white">Why You Should <span className="text-orange-500">Hire Me</span> for Your Next Project?</h2>
+                <p className="text-slate-600 dark:text-zinc-400 mb-8 leading-relaxed">
                   With a multifaceted skill set bridging creative design, high-quality video production, modern web development, and logistical services like data distribution and document processing, I am your one-stop solution. I ensure fast delivery, stunning results, and absolute dependability.
                 </p>
 
@@ -448,19 +451,19 @@ export default function PortfolioPage() {
                     <div className="w-6 h-6 rounded-full bg-orange-500/20 text-orange-500 flex items-center justify-center flex-shrink-0">
                       <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" /></svg>
                     </div>
-                    <span className="text-zinc-200">High-end Graphic & Web Design</span>
+                    <span className="text-slate-700 dark:text-zinc-200">High-end Graphic & Web Design</span>
                   </li>
                   <li className="flex items-center gap-3">
                     <div className="w-6 h-6 rounded-full bg-orange-500/20 text-orange-500 flex items-center justify-center flex-shrink-0">
                       <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" /></svg>
                     </div>
-                    <span className="text-zinc-200">Cinematic Video Edits tailored for Social Media</span>
+                    <span className="text-slate-700 dark:text-zinc-200">Cinematic Video Edits tailored for Social Media</span>
                   </li>
                   <li className="flex items-center gap-3">
                     <div className="w-6 h-6 rounded-full bg-orange-500/20 text-orange-500 flex items-center justify-center flex-shrink-0">
                       <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" /></svg>
                     </div>
-                    <span className="text-zinc-200">Swift Agent Sim Registration & Document handling</span>
+                    <span className="text-slate-700 dark:text-zinc-200">Swift Agent Sim Registration & Document handling</span>
                   </li>
                 </ul>
 
@@ -476,8 +479,8 @@ export default function PortfolioPage() {
             <div className="max-w-7xl mx-auto px-6 lg:px-8">
               <div className="text-center mb-16">
                 <span className="text-orange-500 font-semibold tracking-wide uppercase text-sm mb-2 block">Client Reviews</span>
-                <h2 className="text-4xl font-bold mb-4">What People Are <span className="text-orange-500">Saying</span></h2>
-                <p className="text-zinc-400 max-w-xl mx-auto text-sm">Hear from some of my satisfied clients about their experiences working with me.</p>
+                <h2 className="text-4xl font-bold mb-4 text-slate-900 dark:text-white">What People Are <span className="text-orange-500">Saying</span></h2>
+                <p className="text-slate-600 dark:text-zinc-400 max-w-xl mx-auto text-sm">Hear from some of my satisfied clients about their experiences working with me.</p>
               </div>
 
               <style>{`
@@ -517,7 +520,7 @@ export default function PortfolioPage() {
                     { name: 'Prince Arthur', role: 'Consultant', text: 'Got my certificates and business flyers designed here. Top notch aesthetic and truly premium quality. Highly recommended!', initials: 'PA' },
                     { name: 'Joycelyn Kusi', role: 'Health Pro', text: 'Processed my NHIS card through Cybhen. Professional, friendly, and very transparent throughout the whole process.', initials: 'JK' }
                   ].map((testimonial, i) => (
-                    <div key={i} className="bg-zinc-900 border border-zinc-800 p-8 rounded-3xl hover:border-orange-500/50 transition-all hover:shadow-[0_10px_40px_rgba(249,115,22,0.1)] hover:-translate-y-2 flex flex-col justify-between w-[350px] flex-shrink-0">
+                    <div key={i} className="bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 p-8 rounded-3xl hover:border-orange-500/50 transition-all hover:shadow-[0_10px_40px_rgba(249,115,22,0.1)] hover:-translate-y-2 flex flex-col justify-between w-[350px] flex-shrink-0 shadow-sm">
                       <div>
                         <div className="flex gap-1 mb-6 text-orange-500">
                           {[...Array(5)].map((_, j) => (
@@ -526,15 +529,15 @@ export default function PortfolioPage() {
                             </svg>
                           ))}
                         </div>
-                        <p className="text-zinc-300 text-sm leading-relaxed mb-8 italic">"{testimonial.text}"</p>
+                        <p className="text-slate-600 dark:text-zinc-300 text-sm leading-relaxed mb-8 italic">"{testimonial.text}"</p>
                       </div>
                       <div className="flex items-center gap-4">
                         <div className="w-12 h-12 rounded-full bg-orange-500/10 flex items-center justify-center text-orange-500 font-bold border border-orange-500/20">
                           {testimonial.initials}
                         </div>
                         <div>
-                          <h4 className="text-white font-bold text-sm">{testimonial.name}</h4>
-                          <p className="text-zinc-500 text-xs">{testimonial.role}</p>
+                          <h4 className="text-slate-900 dark:text-white font-bold text-sm">{testimonial.name}</h4>
+                          <p className="text-slate-500 dark:text-zinc-500 text-xs">{testimonial.role}</p>
                         </div>
                       </div>
                     </div>
@@ -547,35 +550,35 @@ export default function PortfolioPage() {
         </main>
 
         {/* ===== FOOTER & CONTACT ===== */}
-        <footer id="contact" className="bg-zinc-900 border-t border-zinc-800 pt-24 overflow-hidden relative pb-12">
+        <footer id="contact" className="bg-slate-50 dark:bg-zinc-900 border-t border-slate-200 dark:border-zinc-800 pt-24 overflow-hidden relative pb-12 transition-colors duration-300">
           <div className="max-w-7xl mx-auto px-6 lg:px-8">
 
-            <div className="bg-zinc-800 rounded-[40px] p-8 md:p-16 mb-20 relative overflow-hidden border border-zinc-700">
+            <div className="bg-white dark:bg-zinc-800 rounded-[40px] p-8 md:p-16 mb-20 relative overflow-hidden border border-slate-200 dark:border-zinc-700 shadow-sm">
               <div className="absolute top-0 right-0 w-64 h-64 bg-orange-500/10 blur-[80px] rounded-full"></div>
               <div className="grid md:grid-cols-2 gap-12 relative z-10">
 
                 <div>
-                  <h3 className="text-4xl font-bold mb-4 text-white">Let's Connect <span className="text-orange-500">There</span></h3>
-                  <p className="text-zinc-400 mb-8 max-w-sm">Have an awesome project in mind or need assistance with documents and data? Send me a message!</p>
+                  <h3 className="text-4xl font-bold mb-4 text-slate-900 dark:text-white">Let's Connect <span className="text-orange-500">There</span></h3>
+                  <p className="text-slate-600 dark:text-zinc-400 mb-8 max-w-sm">Have an awesome project in mind or need assistance with documents and data? Send me a message!</p>
 
                   <div className="space-y-6">
                     <div className="flex items-start gap-4">
-                      <div className="w-12 h-12 bg-zinc-900 rounded-full flex items-center justify-center text-orange-500 flex-shrink-0 border border-zinc-700">
+                      <div className="w-12 h-12 bg-slate-50 dark:bg-zinc-900 rounded-full flex items-center justify-center text-orange-500 flex-shrink-0 border border-slate-200 dark:border-zinc-700">
                         <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
                       </div>
                       <div>
                         <p className="text-zinc-500 text-sm">Email me at</p>
-                        <a href="mailto:cybhenpremium@gmail.com" className="text-white font-medium hover:text-orange-500 transition-colors">cybhenpremium@gmail.com</a>
+                        <a href="mailto:cybhenpremium@gmail.com" className="text-slate-900 dark:text-white font-medium hover:text-orange-500 transition-colors">cybhenpremium@gmail.com</a>
                       </div>
                     </div>
 
                     <div className="flex items-start gap-4">
-                      <div className="w-12 h-12 bg-zinc-900 rounded-full flex items-center justify-center text-orange-500 flex-shrink-0 border border-zinc-700">
+                      <div className="w-12 h-12 bg-slate-50 dark:bg-zinc-900 rounded-full flex items-center justify-center text-orange-500 flex-shrink-0 border border-slate-200 dark:border-zinc-700">
                         <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>
                       </div>
                       <div>
                         <p className="text-zinc-500 text-sm">Call me at</p>
-                        <a href="tel:+233592756828" className="text-white font-medium hover:text-orange-500 transition-colors">+233 59 275 6828</a>
+                        <a href="tel:+233592756828" className="text-slate-900 dark:text-white font-medium hover:text-orange-500 transition-colors">+233 59 275 6828</a>
                       </div>
                     </div>
 
@@ -601,7 +604,7 @@ export default function PortfolioPage() {
                 </div>
 
                 {/* Contact Form Details */}
-                <div className="bg-zinc-900 p-8 rounded-3xl border border-zinc-700">
+                <div className="bg-slate-50 dark:bg-zinc-900 p-8 rounded-3xl border border-slate-200 dark:border-zinc-700 shadow-inner">
                   <form onSubmit={handleContactSubmit} className="flex flex-col gap-4">
                     <div className="grid md:grid-cols-2 gap-4">
                       <input
@@ -610,7 +613,7 @@ export default function PortfolioPage() {
                         required
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                        className="w-full bg-zinc-800 border border-zinc-700 rounded-xl px-5 py-4 focus:outline-none focus:border-orange-500 transition-colors text-white placeholder-zinc-500"
+                        className="w-full bg-slate-100 dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 rounded-xl px-5 py-4 focus:outline-none focus:border-orange-500 transition-colors text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-zinc-500"
                       />
                       <input
                         type="email"
@@ -618,7 +621,7 @@ export default function PortfolioPage() {
                         required
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        className="w-full bg-zinc-800 border border-zinc-700 rounded-xl px-5 py-4 focus:outline-none focus:border-orange-500 transition-colors text-white placeholder-zinc-500"
+                        className="w-full bg-slate-100 dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 rounded-xl px-5 py-4 focus:outline-none focus:border-orange-500 transition-colors text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-zinc-500"
                       />
                     </div>
                     <textarea
@@ -642,10 +645,10 @@ export default function PortfolioPage() {
                     {status === 'error' && <p className="text-red-500 text-sm text-center mt-2 font-medium">Error: {errorMsg}</p>}
                   </form>
 
-                  <div className="mt-8 pt-6 border-t border-zinc-800">
-                    <p className="text-zinc-400 text-sm text-center mb-5 font-medium">Or connect with me completely on:</p>
+                  <div className="mt-8 pt-6 border-t border-slate-200 dark:border-zinc-800">
+                    <p className="text-slate-500 dark:text-zinc-400 text-sm text-center mb-5 font-medium">Or connect with me completely on:</p>
                     <div className="flex gap-3 items-center flex-wrap justify-center">
-                      <a href="https://web.facebook.com/benjamin.amoako.930727" target="_blank" rel="noreferrer" className="w-11 h-11 rounded-xl bg-zinc-800 border border-zinc-700 flex items-center justify-center text-zinc-400 hover:text-white hover:bg-[#1877F2] hover:border-[#1877F2] hover:shadow-[0_0_15px_rgba(24,119,242,0.4)] transition-all" aria-label="Facebook">
+                      <a href="https://web.facebook.com/benjamin.amoako.930727" target="_blank" rel="noreferrer" className="w-11 h-11 rounded-xl bg-slate-100 dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 flex items-center justify-center text-slate-500 dark:text-zinc-400 hover:text-white hover:bg-[#1877F2] hover:border-[#1877F2] hover:shadow-[0_0_15px_rgba(24,119,242,0.4)] transition-all" aria-label="Facebook">
                         <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" /></svg>
                       </a>
                       <a href="https://www.tiktok.com/@cybhen_premium?" target="_blank" rel="noreferrer" className="w-11 h-11 rounded-xl bg-zinc-800 border border-zinc-700 flex items-center justify-center text-zinc-400 hover:text-white hover:bg-zinc-950 hover:border-zinc-500 hover:shadow-[0_0_15px_rgba(255,255,255,0.2)] transition-all" aria-label="TikTok">
@@ -670,8 +673,8 @@ export default function PortfolioPage() {
               </div>
             </div>
 
-            <div className="flex justify-center md:justify-start items-center pt-8 border-t border-zinc-800">
-              <p className="text-zinc-500 text-sm">
+            <div className="flex justify-center md:justify-start items-center pt-8 border-t border-slate-200 dark:border-zinc-800">
+              <p className="text-slate-400 dark:text-zinc-500 text-sm">
                 © {new Date().getFullYear()} Cybhen Premium. All rights reserved.
               </p>
             </div>
